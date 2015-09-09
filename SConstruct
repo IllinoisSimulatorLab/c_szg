@@ -53,6 +53,6 @@ env['WINDOWS_INSERT_DEF'] = True
 
 # Build all the 'normal' driver plugins.
 # Each call to SharedLibrary() returns a (.dll,.a,.def) tuple.
-pluginStuff = env.SharedLibrary( 'szg_unity.cpp' )
+pluginStuff = env.SharedLibrary( 'szg_c.cpp' )
 
 
