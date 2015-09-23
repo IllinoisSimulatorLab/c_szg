@@ -1,0 +1,5 @@
+*.cpp
+*.def
+*.dll
+*.o
+*.obj
