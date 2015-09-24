@@ -6,3 +6,5 @@ Uses scons to build, I only know that it builds in Aszgard so far. Exposes a who
 Szg headers are included in include/, empty lib/(platform)/ directories into which you should drop the libraries.
 
 Output is in build/(platform)/.
+
+NOTE: The `env.VariantDir()` call in SConstruct causes everything to be copied from src/ to build/(platform) before building, which is why you may see error messages referring to source files in build/. Edit the corresponding files in src/.
