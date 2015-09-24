@@ -13,7 +13,9 @@
 extern "C" {
     arSZGClient* EXPORT_API szgClient();
 
-    int EXPORT_API init_szgClient( arSZGClient* cli, char* forcedName );
+    int EXPORT_API connect_szgClient( arSZGClient* cli, char* forcedName );
+
+    void EXPORT_API disconnect_szgClient( arSZGClient* cli );
             
     void EXPORT_API delete_szgClient( arSZGClient* cli );
 }

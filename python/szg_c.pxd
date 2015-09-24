@@ -7,7 +7,9 @@ cdef extern from "szg_c.h":
 
     arSZGClient* szgClient()
 
-    int init_szgClient( arSZGClient* cli, char* forcedName )
+    int connect_szgClient( arSZGClient* cli, char* forcedName )
+
+    void disconnect_szgClient( arSZGClient* cli )
 
     void delete_szgClient( arSZGClient* cli )
 
