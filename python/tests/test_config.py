@@ -35,8 +35,11 @@ def get_config_data():
     defaultConfigPathDict = {'win32':'c:/szg','linux':'/tmp'}
     configDirPath = os.environ.get( 'SZG_CON', defaultConfigPathDict[sys.platform] )
     configFilepath = os.path.join( configDirPath, 'szg.conf' )
-    with open( configFilepath, 'r' ) as f:
-        s = f.read()
+    try:
+        with open( configFilepath, 'r' ) as f:
+            s = f.read()
+    except IOError:
+        return {'computer':{'name':'NULL'}}
     s = '<conf>'+s+'</conf>' # to make it valid XML
     return xmltodict.parse(s)['conf']
 
@@ -58,16 +61,18 @@ def get_login_data():
     configDirPath = os.environ.get( 'SZG_LOGIN', defaultConfigPathDict[sys.platform] )
     username = getpass.getuser()
     configFilepath = os.path.join( configDirPath, 'szg_{}.conf'.format(username) )
-    with open( configFilepath, 'r' ) as f:
-        s = f.read()
+    try:
+        with open( configFilepath, 'r' ) as f:
+            s = f.read()
+    except IOError:
+        return {'user':'NULL','server_name':'NULL','server_IP':'NULL','server_port':0}
     return xmltodict.parse(s)['login']
 
 
 @pytest.fixture
 def get_szg_config():
     cfg = szgc.SzgConfig()
-    if not cfg.read():
-        raise RuntimeError, "SzgConfig.read() failed"
+    cfg.read()
     return cfg
 
 
