@@ -13,7 +13,7 @@ arSZGClient* szgClient() {
 }
 
 
-int connect_szgClient( arSZGClient* cli, char* forcedName ) {
+int szgClient_connect( arSZGClient* cli, char* forcedName ) {
     int retVal = -1;
     int argc = argcG;
     char** argvPtr = new char*[argc];
@@ -31,12 +31,12 @@ int connect_szgClient( arSZGClient* cli, char* forcedName ) {
 }
 
 
-void disconnect_szgClient( arSZGClient* cli ) {
+void szgClient_disconnect( arSZGClient* cli ) {
     cli->closeConnection();
 }
         
 
-void delete_szgClient( arSZGClient* cli ) {
+void szgClient_delete( arSZGClient* cli ) {
     if (cli == NULL) {
         return;
     }

@@ -11,13 +11,14 @@
 
 
 extern "C" {
+
     arSZGClient* EXPORT_API szgClient();
 
-    int EXPORT_API connect_szgClient( arSZGClient* cli, char* forcedName );
+    int EXPORT_API szgClient_connect( arSZGClient* cli, char* forcedName );
 
-    void EXPORT_API disconnect_szgClient( arSZGClient* cli );
+    void EXPORT_API szgClient_disconnect( arSZGClient* cli );
             
-    void EXPORT_API delete_szgClient( arSZGClient* cli );
+    void EXPORT_API szgClient_delete( arSZGClient* cli );
 }
 
 #endif
