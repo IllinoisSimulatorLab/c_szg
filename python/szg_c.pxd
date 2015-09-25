@@ -3,7 +3,7 @@ from libc.stdint cimport uintptr_t
 
 cdef extern from "szg_c.h":
 
-    void cfree( void* ptr )
+    void free_ptr( void* ptr )
     
     ctypedef struct arPhleetConfig:
         pass

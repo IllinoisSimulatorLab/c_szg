@@ -6,6 +6,18 @@ import pytest
 import xmltodict
 
 import szgc
+from find_program import find_program
+
+szgserverMissing = find_program('szgserver') is None
+
+szgserver_found = pytest.mark.skipif( szgserverMissing, \
+                        reason="Failed to find szgserver on exec path")
+
+
+@szgserver_found
+def test_find_server():
+    """Demonstrates usage of custom skip predicates..."""
+    pass
 
 
 @pytest.fixture
@@ -86,4 +98,5 @@ def test_login(get_szg_config,get_login_data):
     assert( get_szg_config.serverName == str(get_login_data['server_name']) )
     assert( get_szg_config.serverIPAddress == str(get_login_data['server_IP']) )
     assert( get_szg_config.serverPort == int(get_login_data['server_port']) )
+
 

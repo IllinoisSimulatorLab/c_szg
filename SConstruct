@@ -14,6 +14,9 @@ env.VariantDir(buildPath,'src')
 szgLibs = ['arDrivers_static','arBarrier_static',
     'arPhleet_static','arMath_static','arLanguage_static']
 
+sourceFiles = [os.path.join( buildPath, f ) for f in os.listdir('src') if os.path.splitext(f)[1] == '.cpp']
+
+
 #fmodPath = os.path.join( os.environ['SZGEXTERNAL'], 'win32', 'fmod-4' )
 #fmodIncPath = os.path.join( fmodPath, 'include' )
 #fmodLibPath = os.path.join( fmodPath, 'lib' )
@@ -61,6 +64,5 @@ env['WINDOWS_INSERT_DEF'] = True
 
 # Build all the 'normal' driver plugins.
 # Each call to SharedLibrary() returns a (.dll,.a,.def) tuple.
-pluginStuff = env.SharedLibrary( buildPath+'/szg_c.cpp' )
-
+sharedLib = env.SharedLibrary( 'szg_c', sourceFiles )
 

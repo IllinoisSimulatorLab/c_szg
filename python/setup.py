@@ -16,7 +16,7 @@ szgLibDir = os.path.join( rootDir, 'lib', sys.platform )
 
 # Make sure szg_c.dll is current
 dllPath = os.path.join( currDir, 'szg_c.dll' )
-dllBuildPath = os.path.join( rootDir, 'build', sys.platform, 'szg_c.dll' )
+dllBuildPath = os.path.join( rootDir, 'szg_c.dll' )
 
 if not os.path.exists( dllPath ):
     if not os.path.exists( dllBuildPath ):

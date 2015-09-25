@@ -1,5 +1,4 @@
 from libc.stdint cimport uintptr_t
-from libc.stdlib cimport malloc, free
 
 # import szg_c.pxd
 cimport szg_c
@@ -29,28 +28,28 @@ cdef class SzgConfig:
         def __get__( self ):
             cdef char* buf = szg_c.szgConfig_getComputerName( <szg_c.arPhleetConfig*>self._cfg )
             cdef bytes val = buf
-            szg_c.cfree( <void*>buf )
+            szg_c.free_ptr( <void*>buf )
             return val
 
     property userName:
         def __get__( self ):
             cdef char* buf = szg_c.szgConfig_getUserName( <szg_c.arPhleetConfig*>self._cfg )
             cdef bytes val = buf
-            szg_c.cfree( <void*>buf )
+            szg_c.free_ptr( <void*>buf )
             return val
 
     property serverName:
         def __get__( self ):
             cdef char* buf = szg_c.szgConfig_getServerName( <szg_c.arPhleetConfig*>self._cfg )
             cdef bytes val = buf
-            szg_c.cfree( <void*>buf )
+            szg_c.free_ptr( <void*>buf )
             return val
 
     property serverIPAddress:
         def __get__( self ):
             cdef char* buf = szg_c.szgConfig_getServerIP( <szg_c.arPhleetConfig*>self._cfg )
             cdef bytes val = buf
-            szg_c.cfree( <void*>buf )
+            szg_c.free_ptr( <void*>buf )
             return val
 
     property serverPort:
