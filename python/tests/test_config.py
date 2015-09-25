@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import sys
 import getpass
@@ -20,7 +21,7 @@ def test_find_server():
     pass
 
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def get_config_data():
     """
     Looks like:
@@ -56,7 +57,7 @@ def get_config_data():
     return xmltodict.parse(s)['conf']
 
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def get_login_data():
     """
     Looks like:
@@ -81,7 +82,7 @@ def get_login_data():
     return xmltodict.parse(s)['login']
 
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def get_szg_config():
     cfg = szgc.SzgConfig()
     cfg.read()
