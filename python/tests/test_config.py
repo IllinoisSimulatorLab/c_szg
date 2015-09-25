@@ -83,7 +83,11 @@ def get_login_data():
 
 
 @pytest.fixture(scope='module')
-def get_szg_config():
+def get_szg_config(request):
+    print("get_szg_config()")
+    def cleanup():
+        print("get_szg_config().cleanup()")
+    request.addfinalizer( cleanup )
     cfg = szgc.SzgConfig()
     cfg.read()
     return cfg
