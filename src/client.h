@@ -12,10 +12,11 @@ extern "C" {
     int EXPORT_API szgClient_connect( arSZGClient* cli, char* forcedName );
     void EXPORT_API szgClient_disconnect( arSZGClient* cli );
 
+    bool EXPORT_API szgClient_sendInitResponse( arSZGClient* cli, bool ok );
+    bool EXPORT_API szgClient_sendStartResponse( arSZGClient* cli, bool ok );
 
-//    bool sendInitResponse(bool ok);
-//    bool sendStartResponse(bool ok);
-
+    bool EXPORT_API szgClient_connected( arSZGClient* cli );
+    
 //    string getAttribute(const string& computerName, const string& groupName, const string& parameterName, const string& validValues /* no default */);
 
 //    string getAttribute(const string& groupName, const string& parameterName, const string& validValues = "");

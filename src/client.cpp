@@ -47,4 +47,15 @@ void szgClient_delete( arSZGClient* cli ) {
 }
 
 
+bool szgClient_sendInitResponse( arSZGClient* cli, bool ok ) {
+    return cli->sendInitResponse( ok );
+}
+
+bool szgClient_sendStartResponse( arSZGClient* cli, bool ok ) {
+    return cli->sendStartResponse( ok );
+}
+
+bool szgClient_connected( arSZGClient* cli ) {
+    return cli->connected();
+}
 

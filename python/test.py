@@ -12,6 +12,7 @@ del cfg
 
 cli = szgc.SzgClient()
 print( "connect:", cli.connect() )
+print( "connected:", cli.connected )
 cli.disconnect()
 del cli
 

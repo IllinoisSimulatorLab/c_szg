@@ -31,8 +31,9 @@ cdef extern from "szg_c.h":
     arSZGClient* szgClient()
 
     int szgClient_connect( arSZGClient* cli, char* forcedName )
-
     void szgClient_disconnect( arSZGClient* cli )
-
     void szgClient_delete( arSZGClient* cli )
+    int szgClient_sendInitResponse( arSZGClient* cli, int ok )
+    int szgClient_sendStartResponse( arSZGClient* cli, int ok )
+    int szgClient_connected( arSZGClient* cli )
 

@@ -74,4 +74,13 @@ cdef class SzgClient:
     def disconnect( self ):
         szg_c.szgClient_disconnect( <szg_c.arSZGClient*>self._client )
 
+    def sendInitResponse( self, int ok ):
+        return szg_c.szgClient_sendInitResponse( <szg_c.arSZGClient*>self._client, ok )
+
+    def sendStartResponse( self, int ok ):
+        return szg_c.szgClient_sendStartResponse( <szg_c.arSZGClient*>self._client, ok )
+
+    property connected:
+        def __get__( self ):
+            return szg_c.szgClient_connected( <szg_c.arSZGClient*>self._client )
 
