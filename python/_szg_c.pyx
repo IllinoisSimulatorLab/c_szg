@@ -1,5 +1,15 @@
 from libc.stdint cimport uintptr_t
 
+# Import the Python-level symbols of numpy
+import numpy as np
+
+# Import the C-level symbols of numpy
+cimport numpy as np
+
+# Numpy must be initialized. When using numpy from C or Cython you must
+# _always_ do that, or you will have segfaults
+np.import_array()
+
 # import szg_c.pxd
 cimport szg_c
 
@@ -84,3 +94,76 @@ cdef class SzgClient:
         def __get__( self ):
             return szg_c.szgClient_connected( <szg_c.arSZGClient*>self._client )
 
+    property ptr:
+        def __get__( self ):
+            return self._client
+
+
+
+cdef class SzgNetInput:
+    cdef uintptr_t _nis
+
+    def __cinit__( self ):
+        self._nis = <uintptr_t>szg_c.szgNetInput()
+
+    def __dealloc__( self ):
+        szg_c.szgNetInput_delete( <szg_c.arNetInputSource*>self._nis )
+
+    def setSlot( self, unsigned int slot ):
+        return szg_c.szgNetInput_setSlot( <szg_c.arNetInputSource*>self._nis, slot )
+
+    def setServiceName( self, char* name ):
+        return szg_c.szgNetInput_setServiceName( <szg_c.arNetInputSource*>self._nis, name )
+
+    property connected:
+        def __get__( self ):
+            return szg_c.szgNetInput_connected( <szg_c.arNetInputSource*>self._nis )
+        
+
+cdef class SzgInputNode:
+    cdef uintptr_t _nod
+
+    def __cinit__( self ):
+        self._nod = <uintptr_t>szg_c.szgInputNode(False)
+
+    def __dealloc__( self ):
+        szg_c.szgInputNode_delete( <szg_c.arInputNode*>self._nod )
+
+    def init( self, cli ):
+        return szg_c.szgInputNode_init( <szg_c.arInputNode*>self._nod, <szg_c.arSZGClient*>cli.ptr )
+
+    def start( self ):
+        return szg_c.szgInputNode_start( <szg_c.arInputNode*>self._nod )
+
+    def stop( self ):
+        return szg_c.szgInputNode_stop( <szg_c.arInputNode*>self._nod )
+
+    property numberButtons:
+        def __get__( self ):
+            return szg_c.szgInputNode_getNumberButtons( <szg_c.arInputNode*>self._nod )
+
+    property numberAxes:
+        def __get__( self ):
+            return szg_c.szgInputNode_getNumberAxes( <szg_c.arInputNode*>self._nod )
+
+    property numberMatrices:
+        def __get__( self ):
+            return szg_c.szgInputNode_getNumberMatrices( <szg_c.arInputNode*>self._nod )
+
+    def getButton( self, int index ):
+        return szg_c.szgInputNode_getButton( <szg_c.arInputNode*>self._nod, index )
+
+    def getAxis( self, int index ):
+        return szg_c.szgInputNode_getAxis( <szg_c.arInputNode*>self._nod, index )
+
+    def getMatrix( self, int index ):
+        cdef float* buf = szg_c.szgInputNode_getMatrix( <szg_c.arInputNode*>self._nod, index )
+        cdef np.ndarray arr = np.zeros( (4,4), dtype=np.float32 )
+        cdef Py_ssize_t i, j
+        cdef int ind = 0
+        for i in range(4):
+            for j in range(4):
+                arr[i,j] = buf[ind]
+                ind += 1
+        szg_c.free_ptr( <void*>buf )
+        return arr

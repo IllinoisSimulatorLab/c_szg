@@ -37,3 +37,34 @@ cdef extern from "szg_c.h":
     int szgClient_sendStartResponse( arSZGClient* cli, int ok )
     int szgClient_connected( arSZGClient* cli )
 
+
+    ctypedef struct arNetInputSource:
+        pass
+
+    arNetInputSource* szgNetInput()
+    void szgNetInput_delete( arNetInputSource* nis )
+    # Only use ONE OR THE OTHER of these two!
+    int szgNetInput_setSlot( arNetInputSource* nis, unsigned int slot )
+    int szgNetInput_setServiceName( arNetInputSource* nis, const char* name )
+    int szgNetInput_connected( arNetInputSource* nis )
+
+
+    ctypedef struct arInputNode:
+        pass
+
+    arInputNode* szgInputNode( int bufferEvents )
+    void szgInputNode_delete( arInputNode* nod )
+
+    int szgInputNode_init( arInputNode* nod, arSZGClient* cli )
+    int szgInputNode_start( arInputNode* nod )
+    int szgInputNode_stop( arInputNode* nod )
+
+    int szgInputNode_getNumberButtons( arInputNode* nod )
+    int szgInputNode_getNumberAxes( arInputNode* nod )
+    int szgInputNode_getNumberMatrices( arInputNode* nod )
+
+    int szgInputNode_getButton( arInputNode* nod, int index )
+    float szgInputNode_getAxis( arInputNode* nod, int index )
+    float* szgInputNode_getMatrix( arInputNode* nod, int index )
+    
+

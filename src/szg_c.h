@@ -15,5 +15,6 @@
 #include "util.h"
 #include "client.h"
 #include "config.h"
+#include "input.h"
 
 #endif

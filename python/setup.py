@@ -4,6 +4,7 @@ from distutils.extension import Extension
 from Cython.Build import cythonize
 import os
 import shutil
+import numpy as np
 
 
 currDir = os.getcwd()
@@ -13,6 +14,7 @@ szgIncDir = os.path.join( rootDir, 'include' )
 szgcIncDir = os.path.join( rootDir, 'src' )
 szgLibDir = os.path.join( rootDir, 'lib', sys.platform )
 
+numpyIncDir = np.get_include()
 
 # Make sure szg_c.dll is current
 dllPath = os.path.join( currDir, 'szg_c.dll' )
@@ -43,7 +45,7 @@ cyExtension = Extension('_szg_c', \
     ['_szg_c.pyx'], \
     language = 'c++', \
     extra_compile_args = ["-D AR_USE_WIN_32","-D AR_USE_MINGW","-D _WIN32"], \
-    include_dirs = [szgcIncDir,szgIncDir], \
+    include_dirs = [szgcIncDir,szgIncDir,numpyIncDir], \
     libraries = ['szg_c']+szgLibs, \
     library_dirs = [currDir,szgLibDir] )
 
