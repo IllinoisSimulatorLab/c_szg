@@ -1,4 +1,6 @@
 #include "szg_c.h"
+#include "arLogStream.h"
+#include <string>
 
 
 char* _stringToBuf( std::string& str ) {
@@ -13,4 +15,8 @@ void free_ptr( void* ptr ) {
 }
 
 
+bool setLogLevel( char* level, bool fVerbose ) {
+    std::string str( level );
+    return ar_setLogLevel( str, fVerbose );
+}
 

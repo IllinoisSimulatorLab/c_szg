@@ -47,6 +47,10 @@ void szgInputNode_delete( arInputNode* nod ) {
     delete nod;
 }
 
+void szgInputNode_addInputSource( arInputNode* nod, arNetInputSource* src, bool iOwnIt ) {
+    return nod->addInputSource( src, iOwnIt );
+}
+
 bool szgInputNode_init( arInputNode* nod, arSZGClient* cli ) {
     return nod->init( *cli );
 }

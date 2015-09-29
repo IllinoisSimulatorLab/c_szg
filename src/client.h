@@ -12,6 +12,9 @@ extern "C" {
     int EXPORT_API szgClient_connect( arSZGClient* cli, char* forcedName );
     void EXPORT_API szgClient_disconnect( arSZGClient* cli );
 
+    void EXPORT_API szgClient_simpleHandshaking( arSZGClient* cli, bool state );
+    int EXPORT_API szgClient_failStandalone( arSZGClient* cli, bool fInited );
+
     bool EXPORT_API szgClient_sendInitResponse( arSZGClient* cli, bool ok );
     bool EXPORT_API szgClient_sendStartResponse( arSZGClient* cli, bool ok );
 

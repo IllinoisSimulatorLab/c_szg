@@ -26,6 +26,8 @@ extern "C" {
     arInputNode* EXPORT_API szgInputNode( bool bufferEvents = false );
     void EXPORT_API szgInputNode_delete( arInputNode* nod );
 
+    void EXPORT_API szgInputNode_addInputSource( arInputNode* nod, arNetInputSource* src, bool iOwnIt );
+
     bool EXPORT_API szgInputNode_init( arInputNode* nod, arSZGClient* cli );
     bool EXPORT_API szgInputNode_start( arInputNode* nod );
     bool EXPORT_API szgInputNode_stop( arInputNode* nod );

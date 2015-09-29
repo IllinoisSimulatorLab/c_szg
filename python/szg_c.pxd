@@ -4,6 +4,7 @@ from libc.stdint cimport uintptr_t
 cdef extern from "szg_c.h":
 
     void free_ptr( void* ptr )
+    int setLogLevel( char* level, int fVerbose )
     
     ctypedef struct arPhleetConfig:
         pass
@@ -29,10 +30,11 @@ cdef extern from "szg_c.h":
         pass
 
     arSZGClient* szgClient()
-
+    void szgClient_delete( arSZGClient* cli )
+    void szgClient_simpleHandshaking( arSZGClient* cli, int state )
     int szgClient_connect( arSZGClient* cli, char* forcedName )
     void szgClient_disconnect( arSZGClient* cli )
-    void szgClient_delete( arSZGClient* cli )
+    int szgClient_failStandalone( arSZGClient* cli, int fInited )
     int szgClient_sendInitResponse( arSZGClient* cli, int ok )
     int szgClient_sendStartResponse( arSZGClient* cli, int ok )
     int szgClient_connected( arSZGClient* cli )
@@ -55,6 +57,7 @@ cdef extern from "szg_c.h":
     arInputNode* szgInputNode( int bufferEvents )
     void szgInputNode_delete( arInputNode* nod )
 
+    void szgInputNode_addInputSource( arInputNode* nod, arNetInputSource* src, int iOwnIt )
     int szgInputNode_init( arInputNode* nod, arSZGClient* cli )
     int szgInputNode_start( arInputNode* nod )
     int szgInputNode_stop( arInputNode* nod )
